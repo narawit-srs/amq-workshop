@@ -8,23 +8,27 @@ pipeline {
      agent any
 
     stages {
+        stage('Initialize')
+        {
+            def dockerHome = tool 'docker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
         stage('Building image') {
             steps{
                 script {
-                    withEnv(["DOCKER_PATH=${tool 'docker'}"]) {
                     app = docker.build registry + ":latest"
-                    }
+                    
                 }
             }
         }
         stage('Push image') {
             steps {
                 script {
-                    withEnv(["DOCKER_PATH=${tool 'docker'}"]) {
+                    
                 docker.withRegistry('', registryCredential) {
                     app.push()
                 }
-                    }
+                    
                 }
             }
         }
