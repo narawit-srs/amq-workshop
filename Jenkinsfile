@@ -11,17 +11,21 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
+                    withEnv(["PATH+OC=${tool 'docker'}"]) {
                     docker.build registry + ":$BUILD_NUMBER"
+                    }
                 }
             }
         }
         stage('Push image') {
             steps {
                 script {
+                    withEnv(["PATH+OC=${tool 'docker'}"]) {
                 docker.withRegistry('https://registry.hub.docker.com', 'git') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                 }
+                    }
                 }
             }
         }
