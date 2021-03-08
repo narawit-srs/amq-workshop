@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Get token via Plugins') {
             steps {
-                app = docker.build("narawitrt/amq-workshop")
+                def app = docker.build("narawitrt/amq-workshop")
             }
         }
         stage('Push image') {
