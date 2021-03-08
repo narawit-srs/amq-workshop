@@ -6,10 +6,10 @@ pipeline {
             script {
                 openshift.withCluster("sirisoft-openshift") {
                     openshift.withProject("amq-dev") {
-                        openshift.raw("login", "--token='' --username=narawit --password=ocp2020")
+                        // openshift.raw("login", "--token='' --username=narawit --password=ocp2020")
 
-                        def token = openshift.raw("whoami", "--token='' -t")
-                        echo "token == ${token.out}"
+                        // def token = openshift.raw("whoami", "--token='' -t")
+                        // echo "token == ${token.out}"
                     }   
                 }
             }
