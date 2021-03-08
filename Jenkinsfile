@@ -2,33 +2,31 @@ pipeline {
     
     environment {
         registry = "narawitrt/amq-workshop"
-        registryCredential = 'dockerhub' 
+        registryCredential = 'dockerhub'
     } 
 
      agent any
 
     stages {
-        withEnv(["PATH=${tool 'docker'}"]) {
         stage('Building image') {
             steps{
                 script {
-                    
+                    withEnv(["PATH+OC=${tool 'docker'}"]) {
                     app = docker.build registry + ":latest"
-                    
+                    }
                 }
             }
         }
         stage('Push image') {
             steps {
                 script {
-                    
-                    docker.withRegistry('', registryCredential) {
-                        app.push()
-                
+                    //withEnv(["PATH+OC=${tool 'docker'}"]) {
+                docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                    app.push()
+                //}
                     }
                 }
             }
-        }
         }
         stage('Get token via Plugins') {
             steps {
