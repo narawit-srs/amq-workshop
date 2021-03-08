@@ -28,7 +28,7 @@ $(document).ready(function(){
   });
   
   function webSocketInvoke() {
-    var socket = io('http://localhost:3000');
+    var socket = io('http://amq-workshop-amq-dev.apps.lab.ocp.lan');
     socket.on('event', (value) => {
       updateData(value);
       chart.update();
