@@ -3,36 +3,37 @@ pipeline {
     environment {
         registry = "narawitrt/amq-workshop"
         registryCredential = 'dockerhub'
-        PATH += "/usr/local/bin"
+        dockerHome = tool 'docker'
+        ocHome = tool 'oc'
+        env.PATH = "${dockerHome}:${ocHome}:${env.PATH}"
     } 
 
      agent any
 
     stages {
-
-        // stage('Building image') {
-        //     steps{
-        //         script {
-        //             app = docker.build registry + ":latest"
+        
+        stage('Building image') {
+            steps{
+                script {
+                    app = docker.build registry + ":latest"
                     
-        //         }
-        //     }
-        // }
-        // stage('Push image') {
-        //     steps {
-        //         script {
+                }
+            }
+        }
+        stage('Push image') {
+            steps {
+                script {
                     
-        //         docker.withRegistry('', registryCredential) {
-        //             app.push()
-        //         }
+                docker.withRegistry('', registryCredential) {
+                    app.push()
+                }
                     
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
         stage('Get token via Plugins') {
             steps {
                 script {
-                    echo "$PATH"
                     withEnv(["PATH+OC=${tool 'oc'}"]) {
                         openshift.withCluster("sirisoft-openshift") {
                             openshift.withProject("amq-dev") {
