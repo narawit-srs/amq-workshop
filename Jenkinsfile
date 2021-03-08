@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     withEnv(["PATH+OC=${tool 'docker'}"]) {
-                docker.withRegistry('https://registry.hub.docker.com', 'registryCredential') {
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                     app.push('latest')
                 }
                     }
