@@ -3,6 +3,7 @@ pipeline {
     environment {
         registry = "narawitrt/amq-workshop"
         registryCredential = 'dockerhub'
+        PATH += "/usr/local/bin"
     } 
 
      agent any
