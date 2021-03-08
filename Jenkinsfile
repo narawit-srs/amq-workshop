@@ -11,7 +11,7 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    withEnv(["PATH+OC=${tool 'docker'}"]) {
+                    withEnv(["PATH+DOCKER=${tool 'docker'}"]) {
                     app = docker.build registry + ":latest"
                     }
                 }
@@ -20,8 +20,8 @@ pipeline {
         stage('Push image') {
             steps {
                 script {
-                    withEnv(["PATH+OC=${tool 'docker'}"]) {
-                docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                    withEnv(["PATH+DOCKER=${tool 'docker'}"]) {
+                docker.withRegistry('', registryCredential) {
                     app.push()
                 }
                     }
