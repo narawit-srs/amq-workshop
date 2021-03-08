@@ -12,7 +12,7 @@ pipeline {
             steps{
                 script {
                     withEnv(["PATH+OC=${tool 'docker'}"]) {
-                    docker.build registry + ":latest"
+                    app = docker.build registry + ":latest"
                     }
                 }
             }
