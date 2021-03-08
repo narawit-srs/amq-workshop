@@ -5,7 +5,7 @@ pipeline {
         registryCredential = 'dockerhub'
         dockerHome = tool 'docker'
         ocHome = tool 'oc'
-        env.PATH = "${dockerHome}:${ocHome}:${env.PATH}"
+        PATH = "${dockerHome}:${ocHome}:${env.PATH}"
     } 
 
      agent any
