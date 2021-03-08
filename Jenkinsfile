@@ -31,6 +31,7 @@ pipeline {
         stage('Get token via Plugins') {
             steps {
                 script {
+                    echo "$PATH"
                     withEnv(["PATH+OC=${tool 'oc'}"]) {
                         openshift.withCluster("sirisoft-openshift") {
                             openshift.withProject("amq-dev") {
