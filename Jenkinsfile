@@ -6,24 +6,22 @@ pipeline {
     } 
 
      agent any
-
+withEnv(["PATH=${tool 'docker'}"]) {
     stages {
         stage('Building image') {
             steps{
                 script {
-                    withEnv(["PATH+docker=${tool 'docker'}"]) {
+                    
                     app = docker.build registry + ":latest"
-                    }
+                    
                 }
             }
         }
         stage('Push image') {
             steps {
                 script {
-                    withEnv(["PATH+docker=${tool 'docker'}"]) {
                     docker.withRegistry('', registryCredential) {
                         app.push()
-                }
                     }
                 }
             }
@@ -45,4 +43,5 @@ pipeline {
             }
         }
     }
+}
 }
