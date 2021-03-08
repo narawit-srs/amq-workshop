@@ -11,20 +11,20 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    withEnv(["PATH=${tool 'docker'}"]) {
+                    // withEnv(["PATH=${tool 'docker'}"]) {
                     app = docker.build registry + ":latest"
-                    }
+                    // }
                 }
             }
         }
         stage('Push image') {
             steps {
                 script {
-                    withEnv(["PATH=${tool 'docker'}"]) {
+                    // withEnv(["PATH=${tool 'docker'}"]) {
                 docker.withRegistry('', registryCredential) {
                     app.push()
                 }
-                    }
+                    // }
                 }
             }
         }
