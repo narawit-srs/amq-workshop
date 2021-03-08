@@ -8,33 +8,26 @@ pipeline {
      agent any
 
     stages {
-        stage('Initialize')
-        {
-            steps{
-            def dockerHome = tool 'docker'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
-        }
 
-        stage('Building image') {
-            steps{
-                script {
-                    app = docker.build registry + ":latest"
+        // stage('Building image') {
+        //     steps{
+        //         script {
+        //             app = docker.build registry + ":latest"
                     
-                }
-            }
-        }
-        stage('Push image') {
-            steps {
-                script {
+        //         }
+        //     }
+        // }
+        // stage('Push image') {
+        //     steps {
+        //         script {
                     
-                docker.withRegistry('', registryCredential) {
-                    app.push()
-                }
+        //         docker.withRegistry('', registryCredential) {
+        //             app.push()
+        //         }
                     
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
         stage('Get token via Plugins') {
             steps {
                 script {
