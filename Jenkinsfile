@@ -6,8 +6,9 @@ pipeline {
     } 
 
      agent any
-withEnv(["PATH=${tool 'docker'}"]) {
+
     stages {
+        withEnv(["PATH=${tool 'docker'}"]) {
         stage('Building image') {
             steps{
                 script {
@@ -20,11 +21,14 @@ withEnv(["PATH=${tool 'docker'}"]) {
         stage('Push image') {
             steps {
                 script {
+                    
                     docker.withRegistry('', registryCredential) {
                         app.push()
+                
                     }
                 }
             }
+        }
         }
         stage('Get token via Plugins') {
             steps {
@@ -43,5 +47,4 @@ withEnv(["PATH=${tool 'docker'}"]) {
             }
         }
     }
-}
 }
