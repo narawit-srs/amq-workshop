@@ -2,7 +2,7 @@ pipeline {
     
     environment {
         registry = "narawitrt/amq-workshop"
-        registryCredential = 'dockerhub'
+        registryCredential = 'dockerhub' 
     } 
 
      agent any
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     withEnv(["PATH+OC=${tool 'docker'}"]) {
-                docker.withRegistry('', 'registryCredential') {
+                docker.withRegistry('', registryCredential) {
                     app.push()
                 }
                     }
