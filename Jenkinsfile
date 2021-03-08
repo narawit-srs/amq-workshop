@@ -1,9 +1,18 @@
 pipeline {
-    agent any
+    
+    environment {
+        registry = "narawitrt/amq-workshop"
+        registryCredential = 'dockerhub'
+    } 
+
+     agent any
+
     stages {
-        stage('Get token via Plugins') {
-            steps {
-                def app = docker.build("narawitrt/amq-workshop")
+        stage('Building image') {
+            steps{
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }
         stage('Push image') {
