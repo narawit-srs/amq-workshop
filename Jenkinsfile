@@ -3,11 +3,7 @@ pipeline {
     stages {
         stage('build project') {
             steps {
-                openshift.withCluster("sirisoft-openshift") {
-                    openshift.withProject("amq-dev") {
-                        echo 'Hello world'
-                    }   
-                }
+                openshift.withCluster("sirisoft-openshift")
             }
         }
     }
