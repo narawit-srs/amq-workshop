@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('build project') {
             steps {
-                openshift.withCluster("sirisoft-openshift")
+                openshift.withCluster()
+                
             }
         }
     }
