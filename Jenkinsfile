@@ -12,7 +12,7 @@ pipeline {
             steps{
                 script {
                     withEnv(["PATH+OC=${tool 'docker'}"]) {
-                    docker.build registry + ":$BUILD_NUMBER"
+                    docker.build registry + ":latest"
                     }
                 }
             }
@@ -21,9 +21,8 @@ pipeline {
             steps {
                 script {
                     withEnv(["PATH+OC=${tool 'docker'}"]) {
-                docker.withRegistry('https://registry.hub.docker.com', 'git') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
+                docker.withRegistry('https://registry.hub.docker.com', '') {
+                    app.push()
                 }
                     }
                 }
