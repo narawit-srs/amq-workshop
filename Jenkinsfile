@@ -42,7 +42,7 @@ pipeline {
                                 def token = openshift.raw("whoami", "--token='' -t")
                                 echo "token == ${token.out}"
 
-                                sh "oc new-app narawitrt/amq-workshop"
+                                sh "oc new-app narawitrt/amq-workshop -o yaml | oc apply -"
                             }
                         }
                     }
