@@ -1,0 +1,29 @@
+Download kafka
+https://www.apache.org/dyn/closer.cgi?path=/kafka/1.1.0/kafka_2.11-1.1.0.tgz
+
+
+Start Zookeeper
+-	bin/zookeeper-server-start.sh config/zookeeper.properties
+Start Kafka Broker
+-	bin/kafka-server-start.sh config/server.properties
+
+Create a topic	
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic workshop
+
+List Topic
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+Describe Topic
+bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic workshop
+
+Delete Topic
+bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic workshop
+
+
+Produce data
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic workshop
+
+
+Consume data
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic workshop --from-beginning
+
